@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>tagname</name>
+    <value>INPUT</value>
+    <isSelected>true</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>name</name>
+    <value>iflsig</value>
+    <isSelected>false</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>disabled</name>
+    <value>true</value>
+    <isSelected>false</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>type</name>
+    <value>hidden</value>
+    <isSelected>false</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>value</name>
+    <value>AAP1E1EAAAAAXe9C9zDPkmyvYHgBTgLIdzL1JvVYI8ZL</value>
+    <isSelected>true</isSelected>
+  </webElementProperties>
+  <Name>INPUT_iflsig</Name>
+</WebElementEntity>
+

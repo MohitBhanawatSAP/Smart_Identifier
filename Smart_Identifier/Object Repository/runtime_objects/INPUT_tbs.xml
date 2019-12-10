@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>tagname</name>
+    <value>INPUT</value>
+    <isSelected>true</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>name</name>
+    <value>tbs</value>
+    <isSelected>false</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>type</name>
+    <value>hidden</value>
+    <isSelected>false</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>value</name>
+    <value>cdr:1,cd_min:x,cd_max:x</value>
+    <isSelected>true</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>class</name>
+    <value>ctbs</value>
+    <isSelected>true</isSelected>
+  </webElementProperties>
+  <Name>INPUT_tbs</Name>
+</WebElementEntity>
+

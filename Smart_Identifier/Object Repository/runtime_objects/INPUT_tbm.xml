@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>tagname</name>
+    <value>INPUT</value>
+    <isSelected>true</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>name</name>
+    <value>tbm</value>
+    <isSelected>false</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>type</name>
+    <value>hidden</value>
+    <isSelected>false</isSelected>
+  </webElementProperties>
+  <Name>INPUT_tbm</Name>
+</WebElementEntity>
+
