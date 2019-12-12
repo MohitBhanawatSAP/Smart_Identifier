@@ -50,7 +50,7 @@ public class SmartIdentifier extends ReUsableActions{
 		else
 		{
 							
-			List<String> li_temp=ReUsableActions.checkForElementWithOtherProperties(li_SelectedProperties, li_New_AllUsefullProperties,li_AllPrimaryProperties);
+			List<String> li_temp=ReUsableActions.checkForElementWithOtherProperties(li_SelectedProperties, li_New_AllUsefullProperties,li_AllPrimaryProperties, li_FaultyProprties);
 			String tempXpath=li_temp.get(0);
 			String toBeSelectedProperty=li_temp.get(1);
 			
@@ -74,7 +74,7 @@ public class SmartIdentifier extends ReUsableActions{
 			{
 				
 				li_temp=null;
-				li_temp=ReUsableActions.checkForElementWithOtherProperties(li_SelectedProperties, li_New_AllUsefullProperties,li_AllSecondaryProperties);
+				li_temp=ReUsableActions.checkForElementWithOtherProperties(li_SelectedProperties, li_New_AllUsefullProperties,li_AllSecondaryProperties, li_FaultyProprties);
 				tempXpath=li_temp.get(0);
 				toBeSelectedProperty=li_temp.get(1);
 				
@@ -97,7 +97,7 @@ public class SmartIdentifier extends ReUsableActions{
 				{
 					
 					li_temp=null;
-					li_temp=ReUsableActions.checkForElementWithOtherProperties(li_SelectedProperties, li_New_AllUsefullProperties,li_AllAdditionalProperties);
+					li_temp=ReUsableActions.checkForElementWithOtherProperties(li_SelectedProperties, li_New_AllUsefullProperties,li_AllAdditionalProperties, li_FaultyProprties);
 					tempXpath=li_temp.get(0);
 					toBeSelectedProperty=li_temp.get(1);
 					

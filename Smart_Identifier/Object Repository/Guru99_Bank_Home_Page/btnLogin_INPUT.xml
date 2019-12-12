@@ -4,7 +4,7 @@
     <matchCondition>equals</matchCondition>
     <name>name</name>
     <value>btnLogin</value>
-    <isSelected>false</isSelected>
+    <isSelected>true</isSelected>
   </webElementProperties>
   <webElementProperties>
     <matchCondition>equals</matchCondition>
@@ -26,4 +26,3 @@
   </webElementProperties>
   <Name>btnLogin_INPUT</Name>
 </WebElementEntity>
-

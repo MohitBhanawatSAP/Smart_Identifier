@@ -64,6 +64,8 @@ public class ReUsableActions extends NewTest {
 				strXpath=SmartIdentifier.triggerSmartIdentifier(driver);
 				driver.findElement(By.xpath(strXpath)).click();
 			}
+			
+			
 		 
 		}
 		catch(NoSuchElementException e)
@@ -230,7 +232,7 @@ public class ReUsableActions extends NewTest {
 		}
 	}
 	
-	public static List checkForElementWithOtherProperties(List<String> li_SelectedProperties, List<String> li_AllUsefull,List<String> li_OtherProperties)
+	public static List checkForElementWithOtherProperties(List<String> li_SelectedProperties, List<String> li_AllUsefull,List<String> li_OtherProperties, List<String> li_FaultyProprties)
 	{
 		List<String> list_Xpath_and_ToBeselectedProperty=new ArrayList();
 		String strXpath="";
@@ -268,8 +270,29 @@ public class ReUsableActions extends NewTest {
 				
 			if(isPropertyMatched && !isPropertyDuplicate)
 			{
-				li_SelectedProperties.add(tempStr);
-				strXpath=SmartIdentifier.xpathBuilderFromListOfProperties(li_SelectedProperties, "ignore");
+				List<String> li_SelectedProperty_ButUseFullPropertiesONly=new ArrayList();
+				for(String selectedPropertyThread:li_SelectedProperties)
+				{
+					boolean faultyPropertyFound=false;
+					for(String faultyPropertyThread:li_FaultyProprties)
+					{
+						
+						String[] arrFaultyP=faultyPropertyThread.split(";");
+						String faultyPropertyName=arrFaultyP[0];
+						if(selectedPropertyThread.contains(faultyPropertyName))
+						{
+							faultyPropertyFound=true;
+							break;
+						}
+						
+					}
+					
+					if(!faultyPropertyFound) li_SelectedProperty_ButUseFullPropertiesONly.add(selectedPropertyThread);
+					
+				}
+				
+				li_SelectedProperty_ButUseFullPropertiesONly.add(tempStr);
+				strXpath=SmartIdentifier.xpathBuilderFromListOfProperties(li_SelectedProperty_ButUseFullPropertiesONly, "ignore");
 				String isElementPresent=ReUsableActions.checkIfElementPresent(strXpath);
 				if(isElementPresent.equals("true"))
 				{
@@ -279,7 +302,7 @@ public class ReUsableActions extends NewTest {
 				}
 				else
 				{
-					li_SelectedProperties.remove(tempStr);
+					li_SelectedProperty_ButUseFullPropertiesONly.remove(tempStr);
 					strXpath="";
 				}
 				
