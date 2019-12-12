@@ -251,7 +251,8 @@ public class SmartIdentifier extends ReUsableActions{
 			String[] multipleSubProperties=propertyThread.split(";;");
 			String strName=multipleSubProperties[0].replaceAll("name:=", "");
 			String strValue="" + multipleSubProperties[1].replaceAll("value:=", "");
-			String tempXpath= xpathBuilder(strName + ":=" + strValue);
+			String strParam=strName + ":=" + strValue;
+			String tempXpath= SmartIdentifier.xpathBuilder(strParam);
 //			isElementPresent=checkIfElementPresent(tempXpath, driver);
 			isElementPresent=ReUsableActions.checkIfElementPresent(tempXpath);
 			if(isElementPresent.equals("true") || isElementPresent.equals("multiple")) li2_FoundElementProperties.add(propertyThread);
@@ -261,7 +262,7 @@ public class SmartIdentifier extends ReUsableActions{
 		
 		li_Parent.add(li2_FoundElementProperties);
 		li_Parent.add(li3_FaultyProperties);
-		return li_Parent;
+ 		return li_Parent;
 	}
 
 	/*-----------------------------------------------xpathBuilder---------------------------------------
@@ -272,38 +273,52 @@ public class SmartIdentifier extends ReUsableActions{
 					  "id:=username
 					  "class:=inLine
 	-------------------------------------------------------------------------------------------------------------------------*/
-	static String xpathBuilder(String... properties) {
+	static String xpathBuilder(String property) {
 		String tempXpath="";
-		String appeder="";
-		String prefix="//*[";
+
+		String prefix="//*";
 		String strText="";
 		String suffix="]";
-		int counter=0;
-		for (String property : properties)
-		{
-			if(counter>0)appeder=" and ";
-			String[] arr=property.split(":=");
 
-			if(arr[0].equals("tag"))
+
+			String[] arr=property.split(":=");
+			
+			if(arr.length>1)
 			{
-				prefix="//" + arr[1] + "[";
-			}
-			else if(arr[0].equals("text"))
-			{
-				strText="contains(text(),'" + arr[1] + "')";
+					
+					String strPropName=arr[0] + "";
+					String strPropValue=arr[1] + "";
+		
+					if(strPropName.equals("tag"))
+					{
+						prefix="//" + strPropValue;
+					}
+					else if(strPropName.equals("text"))
+					{
+						strText="contains(text(),'" + strPropValue + "')";
+					}
+					else
+					{
+						strText= "contains(@" + strPropName + ",'" + strPropValue + "')";
+						
+					}
+		
+					if(strText.length()!=0)
+					{
+		
+						tempXpath=prefix + "["  + strText + suffix;
+					}
+					else
+					{
+						tempXpath=prefix;
+						
+					}
 			}
 			else
 			{
-				tempXpath=tempXpath + appeder + "contains(@" + arr[0] + ",'" + arr[1] + "')";
-				counter++;
+				
+				tempXpath="//*[@" + arr[0] + ",'<<invalid xpath>>']";
 			}
-
-
-
-		}
-
-
-		tempXpath=prefix + tempXpath + appeder + strText + suffix;
 
 		return tempXpath;
 	}
