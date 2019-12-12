@@ -292,7 +292,7 @@ public class Object_Record implements Runnable {
 							match = false;
 							continue;
 						}
-					} else if (list.getChild("name").getValue().toString().trim().equalsIgnoreCase("tagname")) {
+					} else if (list.getChild("name").getValue().toString().trim().equalsIgnoreCase("tag")) {
 						if (list.getChild("value").getValue().toString().trim().equalsIgnoreCase(tagname_value)) {
 							match = true;
 						} else {

@@ -1,3 +1,7 @@
+
 actions.xorSetText("\Object Repository\Guru99_Bank_Home_Page\validateuserid();_INPUT.xml","testuserid");
-actions.xorSetText("\Object Repository\Guru99_Bank_Home_Page\validatepassword();_INPUT.xml","testpassword");
+actions.xorClick("\Object Repository\Guru99_Bank_Home_Page\validateuserid();_INPUT.xml");
+actions.xorSetText("\Object Repository\Guru99_Bank_Home_Page\validatepassword();_INPUT.xml","password");
 actions.xorClick("\Object Repository\Guru99_Bank_Home_Page\INPUT_btnLogin.xml");
+actions.xorClick("");
+actions.xorClick("");

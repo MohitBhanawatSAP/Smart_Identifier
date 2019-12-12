@@ -32,7 +32,7 @@ public class Object_Manipulation {
 					webElementProperties.addContent(new Element("matchCondition").setText("equals"));
 					webElementProperties.addContent(new Element("name").setText(key_value.trim()));
 					webElementProperties.addContent(new Element("value").setText(object_properties.get(key_value).trim()));
-					if(key_value.trim().toLowerCase().contains("class") || key_value.trim().toLowerCase().contains("tagname") || key_value.trim().toLowerCase().contains("text") || key_value.trim().toLowerCase().contains("id") || key_value.trim().toLowerCase().contains("value")) {
+					if(key_value.trim().toLowerCase().contains("class") || key_value.trim().toLowerCase().contains("tag") || key_value.trim().toLowerCase().contains("text") || key_value.trim().toLowerCase().contains("id") || key_value.trim().toLowerCase().contains("value")) {
 						webElementProperties.addContent(new Element("isSelected").setText("true"));
 					}else {
 						webElementProperties.addContent(new Element("isSelected").setText("false"));
@@ -92,7 +92,7 @@ public class Object_Manipulation {
 					webElementProperties.addContent(new Element("matchCondition").setText("equals"));
 					webElementProperties.addContent(new Element("name").setText(key_value.trim()));
 					webElementProperties.addContent(new Element("value").setText(object_properties.get(key_value).trim()));
-					if(key_value.trim().toLowerCase().contains("class") || key_value.trim().toLowerCase().contains("tagname") || key_value.trim().toLowerCase().contains("text") || key_value.trim().toLowerCase().contains("id") || key_value.trim().toLowerCase().contains("value")) {
+					if(key_value.trim().toLowerCase().contains("class") || key_value.trim().toLowerCase().contains("tag") || key_value.trim().toLowerCase().contains("text") || key_value.trim().toLowerCase().contains("id") || key_value.trim().toLowerCase().contains("value")) {
 						webElementProperties.addContent(new Element("isSelected").setText("true"));
 					}else {
 						webElementProperties.addContent(new Element("isSelected").setText("false"));

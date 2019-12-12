@@ -2,28 +2,28 @@
 <WebElementEntity>
   <webElementProperties>
     <matchCondition>equals</matchCondition>
-    <name>tagname</name>
+    <name>name</name>
+    <value>btnReset</value>
+    <isSelected>false</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
+    <name>tag</name>
     <value>INPUT</value>
     <isSelected>true</isSelected>
   </webElementProperties>
   <webElementProperties>
     <matchCondition>equals</matchCondition>
-    <name>name</name>
-    <value>btnLogin</value>
-    <isSelected>false</isSelected>
-  </webElementProperties>
-  <webElementProperties>
-    <matchCondition>equals</matchCondition>
     <name>type</name>
-    <value>submit</value>
+    <value>reset</value>
     <isSelected>false</isSelected>
   </webElementProperties>
   <webElementProperties>
     <matchCondition>equals</matchCondition>
     <name>value</name>
-    <value>LOGIN</value>
+    <value>RESET</value>
     <isSelected>true</isSelected>
   </webElementProperties>
-  <Name>INPUT_btnLogin</Name>
+  <Name>btnReset_INPUT</Name>
 </WebElementEntity>
 
