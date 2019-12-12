@@ -5,10 +5,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class NewTest {
+public class NewTest extends Junit_Listner{
 
 	public static WebDriver driver;
-	public static XmlReader xpathBuilder;
+	public static XmlReader xmlXpathBuilder;
 	public static String strObjectFilePath = "";
 
 	public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class NewTest {
 
 //		System.setProperty("webdriver.chrome.driver","C:\\Thalesh\\Automation\\Selenium\\chromedriver.exe");
 		driver = new ChromeDriver();
-		xpathBuilder = new XmlReader();
+		xmlXpathBuilder = new XmlReader();
 		driver.get("https://demo.guru99.com/V4/");
 		ReUsableActions.xorSetText("validateuserid();_10", "mngr237649");
 		ReUsableActions.xorSetText("validatepassword();_validatepassword();", "dunEnar");

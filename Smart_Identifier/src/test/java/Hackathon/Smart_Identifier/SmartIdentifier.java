@@ -66,6 +66,11 @@ public class SmartIdentifier extends ReUsableActions{
 					
 					replaceExistingPropertyValueFromXmlFile(strNameProperty1_KeyValue, strProperty2_KeyValue);
 				}
+				
+				if(li_FaultyProprties.size()>0)
+				{
+					ReUsableActions.fixFaultyProperties(optimizedXpath, li_FaultyProprties);
+				}
 
 				
 			}
@@ -90,6 +95,11 @@ public class SmartIdentifier extends ReUsableActions{
 						
 						replaceExistingPropertyValueFromXmlFile(strNameProperty1_KeyValue, strProperty2_KeyValue);
 					}
+					
+					if(li_FaultyProprties.size()>0)
+					{
+						ReUsableActions.fixFaultyProperties(optimizedXpath, li_FaultyProprties);
+					}
 				}
 				
 				else
@@ -112,6 +122,11 @@ public class SmartIdentifier extends ReUsableActions{
 							String strProperty2_KeyValue="isSelected:=true";
 							
 							replaceExistingPropertyValueFromXmlFile(strNameProperty1_KeyValue, strProperty2_KeyValue);
+						}
+						
+						if(li_FaultyProprties.size()>0)
+						{
+							ReUsableActions.fixFaultyProperties(optimizedXpath, li_FaultyProprties);
 						}
 					}
 					
@@ -235,7 +250,7 @@ public class SmartIdentifier extends ReUsableActions{
 			
 			String[] multipleSubProperties=propertyThread.split(";;");
 			String strName=multipleSubProperties[0].replaceAll("name:=", "");
-			String strValue=multipleSubProperties[1].replaceAll("value:=", "");
+			String strValue="" + multipleSubProperties[1].replaceAll("value:=", "");
 			String tempXpath= xpathBuilder(strName + ":=" + strValue);
 //			isElementPresent=checkIfElementPresent(tempXpath, driver);
 			isElementPresent=ReUsableActions.checkIfElementPresent(tempXpath);

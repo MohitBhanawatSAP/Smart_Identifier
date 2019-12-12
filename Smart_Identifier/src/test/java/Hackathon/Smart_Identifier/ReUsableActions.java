@@ -53,7 +53,8 @@ public class ReUsableActions extends NewTest {
 	{
 		try
 		{
-			String strXpath=xpathBuilder.xmlToXpathBuilder(strXmlObjName);
+			
+			String strXpath=xmlXpathBuilder.xmlToXpathBuilder(strXmlObjName);
 			String isElementPresent=checkIfElementPresent(strXpath);
 			if(isElementPresent.equals("true"))
 			{
@@ -65,11 +66,13 @@ public class ReUsableActions extends NewTest {
 				driver.findElement(By.xpath(strXpath)).click();
 			}
 			
-			
+//			throw new NoSuchElementException("nirmal >>>>>>>>>>>>");
 		 
 		}
 		catch(NoSuchElementException e)
 		{
+			
+			listner();
 			e.printStackTrace();
 			
 		}
@@ -86,7 +89,7 @@ public class ReUsableActions extends NewTest {
 		
 		try
 		{
-			String strXpath=xpathBuilder.xmlToXpathBuilder(strXmlObjName);
+			String strXpath=xmlXpathBuilder.xmlToXpathBuilder(strXmlObjName);
 			String isElementPresent=checkIfElementPresent(strXpath);
 			if(isElementPresent.equals("true"))
 			{
