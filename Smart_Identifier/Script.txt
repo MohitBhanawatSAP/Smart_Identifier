@@ -1,7 +1,14 @@
-
-actions.xorSetText("\Object Repository\Guru99_Bank_Home_Page\validateuserid();_INPUT.xml","testuserid");
-actions.xorClick("\Object Repository\Guru99_Bank_Home_Page\validateuserid();_INPUT.xml");
-actions.xorSetText("\Object Repository\Guru99_Bank_Home_Page\validatepassword();_INPUT.xml","password");
-actions.xorClick("\Object Repository\Guru99_Bank_Home_Page\INPUT_btnLogin.xml");
+actions.xorSetText("\Object Repository\Guru99_Bank_Home_Page\validateuserid();_10.xml","manafedsgs");
+actions.xorClick("");
+actions.xorSetText("\Object Repository\Guru99_Bank_Home_Page\validatepassword();_validatepassword();.xml","padksafsdhf");
+actions.xorClick("\Object Repository\Guru99_Bank_Home_Page\btnLogin_INPUT.xml");
+actions.xorClick("");
+actions.xorClick("");
+actions.xorClick("");
+actions.xorClick("");
+actions.xorClick("");
+actions.xorClick("");
+actions.xorSetText("\Object Repository\Guru99_Bank_Home_Page\validateuserid();_10.xml","testng");
+actions.xorClick("");
 actions.xorClick("");
 actions.xorClick("");

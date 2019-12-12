@@ -8,6 +8,12 @@
   </webElementProperties>
   <webElementProperties>
     <matchCondition>equals</matchCondition>
+    <name>tagname</name>
+    <value>INPUT</value>
+    <isSelected>true</isSelected>
+  </webElementProperties>
+  <webElementProperties>
+    <matchCondition>equals</matchCondition>
     <name>maxlength</name>
     <value>10</value>
     <isSelected>false</isSelected>
@@ -22,13 +28,7 @@
     <matchCondition>equals</matchCondition>
     <name>name</name>
     <value>uid</value>
-    <isSelected>true</isSelected>
-  </webElementProperties>
-  <webElementProperties>
-    <matchCondition>equals</matchCondition>
-    <name>tag</name>
-    <value>INPUT</value>
-    <isSelected>true</isSelected>
+    <isSelected>false</isSelected>
   </webElementProperties>
   <webElementProperties>
     <matchCondition>equals</matchCondition>
@@ -36,5 +36,6 @@
     <value>text</value>
     <isSelected>false</isSelected>
   </webElementProperties>
-  <Name>validateuserid();_10</Name>
+  <Name>validateuserid();_INPUT</Name>
 </WebElementEntity>
+
