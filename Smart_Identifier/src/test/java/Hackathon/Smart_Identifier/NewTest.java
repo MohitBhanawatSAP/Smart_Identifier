@@ -22,5 +22,4 @@ public class NewTest {
 		ReUsableActions.xorSetText("validatepassword();_validatepassword();", "dunEnar");
 		ReUsableActions.xorClick("btnLogin_INPUT");
 	}
-
 }
