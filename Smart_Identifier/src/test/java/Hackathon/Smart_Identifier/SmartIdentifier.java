@@ -2,6 +2,7 @@ package Hackathon.Smart_Identifier;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,6 +14,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -145,7 +147,12 @@ public class SmartIdentifier extends ReUsableActions{
 			
 
 		
-
+		isElementPresent=ReUsableActions.checkIfElementPresent(optimizedXpath);
+		
+		if(!isElementPresent.equals("true"))
+		{
+			optimizedXpath=getAHelpFromLearningDictionary(li_New_AllUsefullProperties);
+		}
 		return optimizedXpath;
 	}
 	
@@ -193,7 +200,7 @@ public class SmartIdentifier extends ReUsableActions{
 				XPathExpression nodeTagNameExpr = path.compile(propertyXpath);
 				String strProperty_Name=nodeTagNameExpr.evaluate(doc);
 				
-				if(strProperty_Name.equals("xpath")) continue;
+				if(strProperty_Name.contains("xpath")) continue;
 
 				propertyXpath="/WebElementEntity/webElementProperties[" + i + "]/value";
 				nodeTagNameExpr = path.compile(propertyXpath);
@@ -458,6 +465,195 @@ public class SmartIdentifier extends ReUsableActions{
 		
 		
 		return li_return_selectedProperties;
+		
+	}
+	
+	static String getAHelpFromLearningDictionary(List<String> li_usefullPropertiesList)
+	{
+		
+		/*li_usefullPropertiesList >>>>> 
+		 * 
+		   [name:=name;;value:=uid;;isSelected:=false;;matchCondition:=equals, 
+			name:=tag;;value:=INPUT;;isSelected:=true;;matchCondition:=equals, 
+			name:=type;;value:=text;;isSelected:=false;;matchCondition:=equals]
+		 */
+		
+		String strConcatenated_usefullProperties="";
+		for(String singleUsefullPropertyThread:li_usefullPropertiesList)
+			strConcatenated_usefullProperties=strConcatenated_usefullProperties + singleUsefullPropertyThread;
+		
+		List<String> li_PriorityListOfAttributes=getPriorityListOfAttributesFromLearningDictionary();
+		String strXpath="<<invalid Xpath>>";
+		
+		for(String AttributesPropertiesThreads : li_PriorityListOfAttributes)
+		{
+			
+//			name:=tag,id;;priorityScore:=24, 
+//			name:=tag,name;;priorityScore:=20,
+			
+			String[] arr=AttributesPropertiesThreads.split(";;");
+
+			String[] arr_attributes=(arr[0].replaceAll("name:=", "")).split(",");
+			
+			boolean allAttributesFound=true;
+			List<String> li_ToBeSelectedProperties=new ArrayList();
+			
+			for(String singleAttribute:arr_attributes)
+			{
+				singleAttribute=":=" + singleAttribute;
+				for(String singleUsefullPropertyThread : li_usefullPropertiesList)
+				{
+					if(singleUsefullPropertyThread.contains(singleAttribute)) li_ToBeSelectedProperties.add(singleUsefullPropertyThread);
+					
+				}
+					
+				
+				
+				if(!strConcatenated_usefullProperties.contains(singleAttribute))
+				{
+					allAttributesFound=false;
+					break;
+				}
+				
+			}
+			
+			
+			if(allAttributesFound)
+			{
+				
+				
+				strXpath=xpathBuilderFromListOfProperties(li_ToBeSelectedProperties,"ignore");
+				String isElementPresent=ReUsableActions.checkIfElementPresent(strXpath);
+				if(isElementPresent.equals("true")) break;
+				
+			}
+			
+		}
+		
+		
+		return strXpath;
+		
+	}
+	
+	static List getPriorityListOfAttributesFromLearningDictionary()
+	{
+		
+		XPathFactory xpf = XPathFactory.newInstance();
+		XPath path = xpf.newXPath();
+		String strTag="*";
+		String strXpath="";
+		String strText="";
+		String strTextCondition="";
+		String strOther="";
+		String strAppender="";
+		int counter=0;
+		
+		List<String> li_ListOfAttributesPropertiesThreads=new ArrayList();
+		List<String> li_ListOfAttributesPropertiesThreads_2=new ArrayList();
+		List<String> li_ListOfAttributesPropertiesThreads_ReturnResult=new ArrayList();
+		DocumentBuilder dBuilder;
+		Document doc;
+		XPathExpression attributesExpr;
+		NodeList nList;
+
+
+		String filePath_LearningDictionary="src\\test\\java\\Hackathon\\Smart_Identifier\\LocatorsLearningDictionary.xml";
+		
+
+		try {
+			
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			dBuilder= dbFactory.newDocumentBuilder();
+			doc = dBuilder.parse(filePath_LearningDictionary);
+			doc.getDocumentElement().normalize();
+
+			//---------------------------------------------Find total number of webElementProperties----------------------
+
+			attributesExpr = path.compile("/attributes/attribute");
+			nList = (NodeList)attributesExpr.evaluate(doc, XPathConstants.NODESET);
+			int intAttributesCount=nList.getLength();
+			int[] tempArr_ScoreValueOnly=new int[intAttributesCount];
+			
+
+			for(int i=1;i<=intAttributesCount;i++)
+			{
+				String strAttributeProperties="";
+				String[] arr=new String[4];
+				
+
+				String attributeXpath="/attributes/attribute[" + i + "]/name";
+				XPathExpression nodeNameExpr = path.compile(attributeXpath);
+				String strAttributes_Name=nodeNameExpr.evaluate(doc);
+				
+				attributeXpath="/attributes/attribute[" + i + "]/priorityScore";
+				nodeNameExpr = path.compile(attributeXpath);
+				String strPriority_Score=nodeNameExpr.evaluate(doc);
+				tempArr_ScoreValueOnly[i-1]=Integer.valueOf(strPriority_Score);
+				
+				strAttributeProperties="name" + ":=" + strAttributes_Name;
+				strAttributeProperties=strAttributeProperties + ";;" + "priorityScore" + ":=" + strPriority_Score;
+
+
+				li_ListOfAttributesPropertiesThreads.add(strAttributeProperties);
+//				li_ListOfAttributesPropertiesThreads.add(strPriority_Score + "_>><<_" + strAttributeProperties);
+			}
+			
+			int maxScore=tempArr_ScoreValueOnly[0];
+			for(int score:tempArr_ScoreValueOnly)
+				if(score>maxScore) maxScore=score;
+			
+			int intNumberOfDigitsInMaxScore=("" + maxScore).length();
+			System.out.println(maxScore  + "  length : " + intNumberOfDigitsInMaxScore);
+			
+			counter=0;
+			for(String singlePropertyThread: li_ListOfAttributesPropertiesThreads)
+			{
+				int scoreValue=tempArr_ScoreValueOnly[counter];
+				int lengthOfCurrentScoreValue=("" + scoreValue).length();
+				int diff_Length_MaxScore_vs_CurrentScore = intNumberOfDigitsInMaxScore - lengthOfCurrentScoreValue;
+				
+				String str_Zeros="";
+				for(int j=1;j<=diff_Length_MaxScore_vs_CurrentScore;j++)
+					str_Zeros=str_Zeros + "0";
+				
+				String prefix=str_Zeros + scoreValue;
+				
+				li_ListOfAttributesPropertiesThreads_2.add(prefix + "_>><<_" +  singlePropertyThread);
+				counter++;
+			}
+			
+			
+			
+			
+			
+			Collections.sort(li_ListOfAttributesPropertiesThreads_2, Collections.reverseOrder());
+			
+			for(String singlePropertyThread: li_ListOfAttributesPropertiesThreads_2)
+			{
+				
+				String[] arr=singlePropertyThread.split("_>><<_");
+				li_ListOfAttributesPropertiesThreads_ReturnResult.add(arr[1]);
+				
+				
+			}
+
+			
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return li_ListOfAttributesPropertiesThreads_ReturnResult;
+
 		
 	}
 }

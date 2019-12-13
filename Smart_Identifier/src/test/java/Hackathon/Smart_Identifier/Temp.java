@@ -21,37 +21,27 @@ import org.xml.sax.SAXException;
 
 public class Temp {
 
-	public static void main(String[] args) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
-
-		String category="primary";
-		String filePath="src\\test\\java\\Hackathon\\Smart_Identifier\\PropertySelectionPriority.xml";
-		ReUsableActions.strObjectFilePath=filePath;
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		Document doc = dBuilder.parse(filePath);
-	     
-		doc.getDocumentElement().normalize();
-		
-		XPathFactory xpf = XPathFactory.newInstance();
-		XPath path = xpf.newXPath();
+	public static void main(String[] args)
+	{
 
 	
-	try {
+		
+			List<String> li_PriorityListOfAttributes=SmartIdentifier.getPriorityListOfAttributesFromLearningDictionary();
+			
+			
+			for(String AttributesPropertiesThreads : li_PriorityListOfAttributes)
+			{
+				
+//				name:=tag,id;;priorityScore:=24, 
+//				name:=tag,name;;priorityScore:=20,
+				
+				String[] arr=AttributesPropertiesThreads.split(";;");
 
-						
-			String x="/propertiesCollection/properties[@id='primary']";
-			XPathExpression nodeTagNameExpr = path.compile(x);
-			String strTextOfNode=nodeTagNameExpr.evaluate(doc);
-			System.out.println(">>>>>>>>>>>" + strTextOfNode);
+				String[] arr_attributes=(arr[0].replaceAll("name:=", "")).split(",");
+				
+			}
 			
 			
-		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 			
-			
-
 	}
-
 }

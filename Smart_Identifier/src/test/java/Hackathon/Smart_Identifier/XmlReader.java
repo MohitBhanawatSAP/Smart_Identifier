@@ -14,9 +14,23 @@ import org.w3c.dom.NodeList;
 public class XmlReader 
 {
 
+	String filePath_OR=null;
+	public XmlReader(String x)
+	{
+		
+		filePath_OR=x;
+		
+	}
+	
     public String xmlToXpathBuilder(String objectName) throws Exception 
     {
-	    	String filePath="Object Repository\\Guru99_Bank_Home_Page\\" + objectName + ".xml";
+//    		String filePath_OR="Object Repository\\Guru99_Bank_Home_Page";
+    		String filePath=filePath_OR;
+    		if(filePath.startsWith("\\")) filePath=filePath.substring(2);
+    		
+    		if(!filePath.endsWith("\\")) filePath=filePath + "\\";
+    		
+	    	filePath=filePath + objectName + ".xml";
 	    	ReUsableActions.strObjectFilePath=filePath;
 	    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

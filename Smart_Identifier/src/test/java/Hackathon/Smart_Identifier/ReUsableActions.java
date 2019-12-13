@@ -43,6 +43,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
+//public class ReUsableActions extends Test_OrangeHRM {
 public class ReUsableActions extends NewTest {
 	
 	
@@ -62,8 +63,14 @@ public class ReUsableActions extends NewTest {
 			}
 			else
 			{
-				strXpath=SmartIdentifier.triggerSmartIdentifier(driver);
-				driver.findElement(By.xpath(strXpath)).click();
+				String strSmartXpath=SmartIdentifier.triggerSmartIdentifier(driver);
+				isElementPresent=checkIfElementPresent(strSmartXpath);
+				if(!isElementPresent.equals("true")) strSmartXpath=strXpath;
+				
+
+				
+				driver.findElement(By.xpath(strSmartXpath)).click();
+				
 			}
 			
 //			throw new NoSuchElementException("nirmal >>>>>>>>>>>>");
@@ -97,8 +104,13 @@ public class ReUsableActions extends NewTest {
 			}
 			else
 			{
-				strXpath=SmartIdentifier.triggerSmartIdentifier(driver);
-				driver.findElement(By.xpath(strXpath)).sendKeys(textValue);
+				String strSmartXpath=SmartIdentifier.triggerSmartIdentifier(driver);
+				isElementPresent=checkIfElementPresent(strSmartXpath);
+				if(!isElementPresent.equals("true")) strSmartXpath=strXpath;
+				
+				
+				driver.findElement(By.xpath(strSmartXpath)).sendKeys(textValue);
+				
 			}
 		 
 		}
